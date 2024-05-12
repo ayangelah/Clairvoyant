@@ -2,6 +2,7 @@ import requests
 import urllib, json
 from datetime import date
 import sqlite3
+from auth import authentication
 
 conn = sqlite3.connect('clairvoyant.db')
 cursor = conn.cursor()
@@ -27,5 +28,9 @@ def sleep(user_id, user_token, date):
     
 def temp(user_id, user_token, date):
     response = generic_fetch(user_id, user_token, '/temp/skin/date/', date)
+    print(response)
     values = json.loads(response.content)
     print(values)
+
+mom_token = authentication('C2R3WZ')
+print(temp('C2R3WZ', mom_token, date.today()))
